@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div class="target"></div>
+
+<script>
+
+    let target = document.querySelector('.target');
+    let userPosts = 'https://jsonplaceholder.typicode.com/posts/';
+    let userComents = 'https://jsonplaceholder.typicode.com/comments';
+
+    let url = new URL(location.href);
+    let post = url.searchParams.get('asd');
+    console.log(post);
+    let parse = JSON.parse(post);
+    console.log(parse);
+
+    fetch(userPosts + "?id=" + post)
+        .then(value => value.json())
+        .then(postsX => {
+
+            let postA = postsX;
+            let div = document.createElement('div');
+            let h2 = document.createElement('h2');
+            h2.innerText = ` USERID: ${parse.userId} \n ID: ${parse.id} \n TITLE: ${parse.title} \n BODY: ${parse.body}`;
+            h2.style.background = 'lightsteelblue';
+            h2.style.borderRadius = '5px';
+            h2.style.fontSize = '140%';
+            h2.style.boxSizing = 'border-box';
+            h2.style.padding = '0.3% 1% 0.3% 2%';
+            h2.style.margin = '0.1% 10% 0.3% 10%';
+            h2.style.textAlign = 'center';
+
+            div.appendChild(h2);
+            target.appendChild(div);
+        });
+
+    fetch(userComents + "?postId=" + parse.id)
+        .then(resp => resp.json())
+        .then((index) => {
+            let {inform} = index;
+            console.log(index);
+
+            let div1 = document.createElement('div1');
+            div1.style.background = 'lightblue';
+            div1.style.borderRadius = '5px';
+            div1.style.display = 'flex';
+            div1.style.flexWrap = 'wrap';
+
+            for (const blabla of index) {
+
+                let h3 = document.createElement('h3');
+                h3.innerText = ` POSTID: ${blabla.postId} \n ID: ${blabla.id} \n NAME: ${blabla.name} \n EMAIL: ${blabla.email} \n BODY: ${blabla.body}`;
+                h3.style.background = 'cadetblue';
+                h3.style.fontSize = '115%';
+                h3.style.textAlign = 'center';
+                h3.style.borderRadius = '5px';
+                h3.classList.add('user-biv');
+                h3.style.width = '23.6vw';
+                h3.style.height = '35vh';
+                h3.style.borderRadius = '5px';
+                h3.style.border = '2px solid black';
+                h3.style.boxSizing = 'border-box';
+                h3.style.margin = '9px';
+                h3.style.paddingTop = '0.3%';
+
+                div1.appendChild(h3);
+                document.body.appendChild(div1);
+
+            }
+        })
+
+
+</script>
+</body>
+</html>

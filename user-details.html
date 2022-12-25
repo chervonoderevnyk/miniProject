@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="target"></div>
+<button class="btn">post of current user</button>
+
+<script>
+
+    let target = document.querySelector('.target');
+    target.style.display = 'flex';
+    target.style.flexWrap = 'wrap';
+    let abcUrl = 'https://jsonplaceholder.typicode.com/users/';
+    let userPosts = 'https://jsonplaceholder.typicode.com/posts/';
+
+    let url = new URL(location.href);
+    console.log(url);
+    let id = url.searchParams.get("id");
+    console.log(id);
+
+    fetch(abcUrl + id)
+        .then(value => value.json())
+        .then(value => {
+            console.log(value);
+
+            let div2 = document.createElement('div2');
+            div2.style.width = '95vw';
+            div2.style.height = '46vh';
+            div2.style.background = 'cadetblue';
+            div2.style.display = 'flex';
+            div2.style.flexWrap = 'wrap';
+            div2.style.borderRadius = '5px';
+            div2.style.margin = '0% 2% 0.1% 2%';
+            div2.style.boxSizing = 'border-box';
+            div2.style.padding = '0.7%';
+
+            let div4 = document.createElement('div4');
+            div4.style.background = 'cadetblue';
+            div4.style.borderRadius = '5px';
+            div4.style.display = 'flex';
+            div4.style.flexWrap = 'wrap';
+            div4.style.width = '100%';
+            div4.style.height = '49%';
+            div4.style.boxSizing = 'border-box';
+
+            let user = value;
+
+            let div3 = document.createElement('div3');
+            div3.innerText = ` ID: ${user.id} \n NAME: ${user.name} \n USERNAME: ${user.username} \n EMAIL: ${user.email} \n PHONE: ${user.phone} \n WEBSITE: ${user.website}`;
+            div3.style.textAlign = 'center';
+            div3.style.background = 'lightsteelblue';
+            div3.style.borderRadius = '5px';
+            div3.style.width = '100%';
+            div3.style.height = '49%';
+            div3.style.fontSize = '140%';
+            div3.style.boxSizing = 'border-box';
+            div3.style.padding = '0.5%';
+
+            let div5 = document.createElement('div5');
+            div5.innerText = `ADDRESS: \n street:  ${user.address.street}\n suit: ${user.address.suite} \n city: ${user.address.city} \n zipcode: ${user.address.zipcode}`;
+            div5.style.textAlign = 'center';
+            div5.style.background = 'lightsteelblue';
+            div5.style.borderRadius = '5px';
+            div5.style.width = '36%';
+            div5.style.height = '97%';
+            div5.style.fontSize = '131%';
+            div5.style.margin = '0.3%';
+            div5.style.boxSizing = 'border-box';
+            div5.style.padding = '1%';
+
+            let div6 = document.createElement('div6');
+            div6.innerText = `GEO: \n lat: ${user.address.geo.lat}\n lng: ${user.address.geo.lng}`;
+            div6.style.textAlign = 'center';
+            div6.style.background = 'lightsteelblue';
+            div6.style.borderRadius = '5px';
+            div6.style.width = '26.1%';
+            div6.style.height = '97%';
+            div6.style.fontSize = '131%';
+            div6.style.margin = '0.3% ';
+            div6.style.boxSizing = 'border-box';
+            div6.style.padding = '1%';
+
+            let div7 = document.createElement('div7');
+            div7.innerText = ` COMPANY: \n name: ${user.company.name}\n catchPhrase: ${user.company.catchPhrase}\n bs: ${user.company.bs}`;
+            div7.style.textAlign = 'center';
+            div7.style.background = 'lightsteelblue';
+            div7.style.borderRadius = '5px';
+            div7.style.width = '36%';
+            div7.style.height = '97%';
+            div7.style.fontSize = '131%';
+            div7.style.margin = '0.3%';
+            div7.style.boxSizing = 'border-box';
+            div7.style.padding = '1%';
+
+            div4.append(div5,div6,div7);
+            div2.append(div3,div4);
+            target.appendChild(div2);
+        });
+
+    let btn = document.querySelector('.btn');
+    btn.style.border = '3px solid black';
+    btn.style.borderRadius = '5px';
+    btn.style.fontSize = '180%';
+    btn.style.textAlign = 'center';
+    btn.style.background = 'silver';
+    btn.style.width = '90vw';
+    btn.style.height = '9vh';
+    btn.style.margin = '0.1% 1% 0.3% 5%';
+
+    btn.onclick = function () {
+
+        fetch(userPosts + "?userId=" + id)
+            .then(index => index.json())
+            .then(posts => {
+                console.log(posts);
+
+                let div0 = document.createElement('div');
+                div0.style.background = 'cadetblue';
+                div0.style.borderRadius = '5px';
+                div0.style.display = 'flex';
+                div0.style.flexWrap = 'wrap';
+
+                for (const post of posts) {
+
+                    let div1 = document.createElement('div');
+                    div1.innerText = ` P0ST(title):  ${post.title}`;
+                    div1.style.fontSize = '130%';
+                    div1.style.textAlign = 'center';
+                    div1.style.background = 'lightsteelblue';
+                    div1.style.borderRadius = '5px';
+                    div1.classList.add('user-biv');
+                    div1.style.width = '17.5vw';
+                    div1.style.height = '18vh';
+                    div1.style.borderRadius = '5px';
+                    div1.style.border = '2px solid black';
+                    div1.style.margin = 'calc(2% - 20px)';
+                    div1.style.boxSizing = 'border-box';
+                    div1.style.paddingTop = '2px';
+
+                    let a = document.createElement('a');
+                    a.innerText = 'details about post';
+                    a.href = 'post-details.html?asd=' + JSON.stringify(post);
+                    a.style.border = '2px solid black';
+                    a.style.borderRadius = '5px';
+                    a.style.fontSize = '85%';
+                    a.style.background = 'silver';
+                    a.style.display = 'flex';
+                    a.style.margin = '6% 28% 1% 28%';
+                    a.style.boxSizing = 'border-box';
+                    a.style.padding = '1% ';
+
+                    div1.appendChild(a);
+                    div0.appendChild(div1);
+                    document.body.appendChild(div0);
+                }
+            });
+    };
+
+</script>
+
+</body>
+</html>

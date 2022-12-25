@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+<script>
+
+    fetch('https://jsonplaceholder.typicode.com/users')
+
+        .then(response => response.json())
+        .then((index) => {
+            let {info} = index;
+            console.log(index);
+
+            let div0 = document.createElement('div');
+            div0.style.background = 'lightsteelblue';
+            div0.style.borderRadius = '5px';
+            div0.style.display = 'flex';
+            div0.style.flexWrap = 'wrap';
+
+            for (const user of index) {
+
+                let div = document.createElement('biv');
+                div.classList.add('user-biv');
+                div.style.width = '46vw';
+                div.style.height = '14vh';
+                div.style.background = 'silver';
+                div.style.borderRadius = '5px';
+                div.style.border = '2px solid black';
+                div.style.marginLeft = 'calc(3% - 19px)';
+                div.style.marginTop = 'calc(1% - 3px)';
+                div.style.marginBottom = 'calc(1% - 3px)';
+
+                let h2 = document.createElement('h2');
+                h2.style.border = '1px solid silver';
+                h2.style.margin = '3%';
+
+                let a = document.createElement('a');
+                a.innerText = 'information';
+                a.style.border = '2px solid black';
+                a.style.borderRadius = '5px';
+                a.style.fontSize = '80%';
+                a.style.background = 'white';
+                a.style.display = 'flex';
+                a.style.margin = '1% 44% 1% 36%';
+                a.style.boxSizing = 'border-box';
+                a.style.padding = '1% 0.2% 1% 4%';
+                a.href = 'user-details.html?id=' + user.id;
+
+                let b = document.createElement('b');
+                b.innerText = `${user.id} - ${user.name}`;
+                b.style.fontSize = '110%';
+                b.style.boxSizing = 'border-box';
+                b.style.padding = '10% 20% 30% 30%';
+                b.style.textAlign = 'center';
+
+                h2.append(b, a);
+                div.appendChild(h2)
+                div0.appendChild(div);
+                document.body.appendChild(div0);
+
+            }
+        });
+
+</script>
+
+</body>
+</html>
+
+
+<!--В index.html-->
+<!--1 отримати масив об'єктів з endpoint`а https://jsonplaceholder.typicode.com/users-->
+<!--2 Вивести id,name всіх user в index.html. Окремий блок для кожного user.-->
+<!--3 Додати кожному блоку кнопку/посилання , при кліку на яку відбувається перехід  на сторінку user-details.html, котра має детальну інфорацію про об'єкт на який клікнули-->
+
+
+<!--На странице user-details.html:-->
+<!--4 Вивести всю, без виключення, інформацію про об'єкт user на який клікнули-->
+<!--5 Додати кнопку "post of current user", при кліку на яку, з'являються title всіх постів поточного юзера-->
+<!--(для получения постов используйте эндпоинт https://jsonplaceholder.typicode.com/users/USER_ID/posts)-->
+<!--6 Каждому посту додати кнопку/посилання, при кліку на яку відбувається перехід на сторінку post-details.html, котра має детальну інфу про поточний пост.-->
+
+<!--На странице post-details.html:-->
+<!--7 Вивести всю, без виключення, інформацію про об'єкт post на який клікнули .-->
+<!--8 Нижчє інформаці про пост, вивести всі коментарі поточного поста (ендпоінт  - https://jsonplaceholder.typicode.com/posts/POST_ID/comments)-->
+
+<!--Стилизація проєкта - -->
+<!--index.html - всі блоки з user - по 2 в рядок. кнопки/аосилвння розташувати під інформацією про user.-->
+<!--user-details.html - блок з інфою про user зверху сторінки. Кнопка нижчє, на 90% ширини сторінки, по центру.-->
+<!--блоки з короткою іфною про post - в ряд по 5 .-->
+<!--post-details.html - блок з інфою про пост зверху. Коментарі - по 4 в ряд.-->
+<!--Всі елементи котрі характеризують users, posts, comments візуалізувати, так, щоб було видно що це блоки (дати фон. марджини і тд)-->
+
